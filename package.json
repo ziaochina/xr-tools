@@ -1,12 +1,13 @@
 {
   "name": "xr-tools",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "bin": {
     "xr-tools": "./bin/xr-tools"
   },
   "scripts": {
     "compile": "babel -d lib/ src/",
+    "commit": "git add . && git commit -m 'zlj' &&  git push -u origin master",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
