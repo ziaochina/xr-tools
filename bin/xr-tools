@@ -4,13 +4,29 @@ const program = require('commander');
 const package = require('../package.json');
 
 program
-  .version(package.version)
-  .usage('[command] [options]')
-  .command('init [options]', 'init')
-  .parse(process.argv);
+	.version(package.version)
+	.option('-C, --chdir <path>', 'change the working directory')
+	.option('-c, --config <path>', 'set config path. defaults to ./deploy.conf')
+	.option('-T, --no-tests', 'ignore test hook')
+	.parse(process.argv);
+
+program
+	.command('init')
+	.description('execute the given remote cmd')
+	.action(function() {
+		console.log('init test')
+	});
+
+
+program
+	.command('*')
+	.action(function(env) {
+		console.log('deploying "%s"', env);
+	});
+
 
 //捕获当前进程接收到的信号（如按下了 ctrl + c)
 process.on('SIGINT', function() {
-  program.runningCommand && program.runningCommand.kill('SIGKILL');
-  process.exit(0);
+	program.runningCommand && program.runningCommand.kill('SIGKILL');
+	process.exit(0);
 });
