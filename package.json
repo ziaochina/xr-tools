@@ -1,6 +1,6 @@
 {
   "name": "xr-tools",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "",
   "bin": {
     "xr-tools": "./bin/xr-tools"
