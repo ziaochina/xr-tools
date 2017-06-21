@@ -1,5 +1,5 @@
 {
-  "name": "master",
+  "name": "xr-tools",
   "version": "0.0.1",
   "description": "",
   "bin": {
@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/ziaochina/xr-tools#readme",
   "dependencies": {
-    "commander": "^2.9.0"
+    "commander": "^2.9.0",
+    "user": "0.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
