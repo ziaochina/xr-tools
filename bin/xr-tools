@@ -9,8 +9,10 @@ program
 
 program
 	.command('app')
-	.option('-i, --init <options>', '初始化一个应用')
-	.option('-c, --compile [options]', '编译应用')
+	.option('-i, --init <name>', '初始化一个应用')
+	.option('-c, --compile', '编译应用')
+	.option('-s, --start-app-name [name]', '开始的应用名称')
+	.option('-t, --target-dom-id [id]', '目标dom id')
 	.description('app工具')
 	.action(function(options) {
 		app(options)

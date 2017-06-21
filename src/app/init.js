@@ -12,7 +12,7 @@ const {
 
 export default function init(name) {
 
-	var cwd = join(__dirname, '../../assets/init/demo');
+	var cwd = join(__dirname, '../../assets/app/demo');
 	var dest = join(process.cwd(), name);
 
 	vfs.src(['**/*', '!node_modules/**/*'], {

@@ -1,10 +1,9 @@
 import fs from 'fs'
 import path from 'path'
 
-export default function compile() {
+export default function compile(startAppName = 'demo-helloWorld', targetDomId = 'app') {
 
 	const basePath = process.cwd(),
-		rootAppName = 'apps/root',
 		appPaths = []
 
 	//获取文件数组
@@ -24,7 +23,7 @@ export default function compile() {
 		})
 	}
 
-	findAppPath(basePath, './apps')
+	findAppPath(basePath, '.')
 
 	var importAppsContent = appPaths.map(o => `import ${o.replace(/\./g,'').replace(/\//g,'_')} from '${o}/index.app'`).join('\r\n')
 
@@ -35,12 +34,14 @@ export default function compile() {
 	}).join(',\r\n')
 	configAppsContent += '\r\n\t}\r\n})'
 
-	var indexTemplate = fs.readFileSync(path.join(basePath, 'index.template'), 'utf-8');
+	var indexTemplate = fs.readFileSync('../../assets/app/index.template',
+		'utf-8');
 
 	var indexContent = indexTemplate
 		.replace('${import-apps}', importAppsContent)
 		.replace('${config-apps}', configAppsContent)
-		.replace('${root-app-name}', rootAppName)
+		.replace('${start-app-name}', startAppName)
+		.replace('${target-dom-id}', targetDomId)
 
 
 	var existsIndex = fs.existsSync(path.join(basePath, 'index.js'))
