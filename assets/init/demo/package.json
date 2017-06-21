@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "demo",
   "scripts": {
-    "generate": "xr-tools generate",
-    "start": "xr-tools start",
+    "compile": "xr-tools app --compile",
+    "start": "webpack-dev-server --inline --progress --colors --watch --compress --content-base ./dist  --port 8089 --host 0.0.0.0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
