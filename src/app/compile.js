@@ -34,7 +34,7 @@ export default function compile(startAppName = 'demo-helloWorld', targetDomId = 
 	}).join(',\r\n')
 	configAppsContent += '\r\n\t}\r\n})'
 
-	var indexTemplate = fs.readFileSync('../../assets/app/index.template',
+	var indexTemplate = fs.readFileSync(path.join(__dirname, '../../assets/app/index.template'),
 		'utf-8');
 
 	var indexContent = indexTemplate
