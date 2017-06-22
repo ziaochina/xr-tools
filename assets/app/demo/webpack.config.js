@@ -5,7 +5,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var plugins = [
     new webpack.DefinePlugin({
         "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
-    })
+    }),
     new HtmlWebpackPlugin({
         filename: './index.html', //生成的html存放路径，相对于 path
         template: './index.html', //html模板路径
@@ -31,7 +31,7 @@ module.exports = {
     entry: {
         bundle: ["./index.js"],
         vendor: ["react", 'react-dom', 'xr-app-loader']
-    }
+    },
 
     output: {
         path: path.join(__dirname, "/dist/"),
