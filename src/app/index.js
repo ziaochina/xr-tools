@@ -7,6 +7,6 @@ export default function app(options) {
 	}
 
 	if (options.compile) {
-		compile(options['start-app-name'], options['target-dom-id'])
+		compile(options['startAppName'], options['targetDomId'])
 	}
 }
