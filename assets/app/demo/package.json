@@ -1,7 +1,7 @@
 {
-  "name": "demo",
+  "name": "${name}",
   "version": "0.0.1",
-  "description": "demo",
+  "description": "${name}",
   "scripts": {
     "compile": "xr-tools app --compile",
     "start": "webpack-dev-server --inline --progress --colors --watch --compress --content-base ./dist  --port 8089 --host 0.0.0.0",

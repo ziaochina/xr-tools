@@ -3,5 +3,5 @@ import {
 } from 'immutable'
 
 export function initView(state = Map()) {
-	return state.set('text', '这是hello world app!')
+	return state.set('text', '这是${name} app!')
 }

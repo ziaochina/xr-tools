@@ -24,6 +24,18 @@ export default function init(name) {
 		.pipe(vfs.dest(dest))
 		.on('end', function() {
 			fs.renameSync(path.join(dest, 'gitignore'), path.join(dest, '.gitignore'));
+
+			var replaceNameFiles = [
+				path.join(dest, 'src/index.app.js'),
+				path.join(dest, 'src/component.js'),
+				path.join(dest, 'src/reducer.js'),
+				path.join(dest, 'package.json')
+			]
+
+			replaceNameFiles.forEach(o => {
+				fs.writeFileSync(o, fs.readFileSync(o, 'utf-8').replace(/\$\{name\}/g, name))
+			})
+
 		})
 		.resume();
 }

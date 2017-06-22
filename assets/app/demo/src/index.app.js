@@ -1,11 +1,11 @@
 module.exports = {
-	name: 'demo-helloWorld',
+	name: '${name}',
 	version: '0.0.1',
-	description: 'demo-helloWorld',
+	description: '${name}',
 	author: '',
 	load: (cb) => {
 		require.ensure([], require => {
 			cb(require('./component'), require('./action'), require('./reducer'))
-		}, 'demo-helloWorld')
+		}, '${name}')
 	}
 }
