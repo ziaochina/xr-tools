@@ -23,11 +23,40 @@ function createApp(appName){
 		})
 		.pipe(template(dest))
 		.pipe(vfs.dest(dest))
+		.on('end', function() {
+			var replaceNameFiles = [
+				path.join(dest, 'package.josn'),
+			]
+
+			replaceNameFiles.forEach(o => {
+				fs.writeFileSync(o, fs.readFileSync(o, 'utf-8').replace(/\$\{appName\}/g, apName))
+			})
+
+		})
 		.resume();
 
 	var npm = findNpm()
 	//runCmd(which.sync('cd'), [appName], function () {})
-	runCmd(which.sync(npm), ['install', 'react', '--save'], function () {})
+	runCmd(which.sync(npm), ['install', 'react', 'react-dom', 'xr-meta-engine', '--save'], function () {})
+	runCmd(which.sync(npm), [
+		'install', 
+		'babel-core', 
+		'babel-loader', 
+		'babel-plugin-add-module-exports',
+		'babel-plugin-transform-decorators-legacy',
+		'babel-plugin-transform-runtime',
+		'babel-preset-es2015',
+		'babel-preset-react',
+		'babel-preset-stage-0',
+		'css-loader',
+		'file-loader',
+		'html-webpack-plugin',
+		'less',
+		'less-loader',
+		'style-loader',
+		'webpack',
+		'webpack-dev-server',
+		 '--save-dev'], function () {})
 }
 
 
