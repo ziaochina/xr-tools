@@ -14,7 +14,7 @@ export default function app(cmd, options) {
 
 function createApp(appName){
 	var cwd = join(__dirname, '../../assets/app/appTemplate');
-	var dest = join(process.cwd(), appName);
+	var dest = join(process.cwd());
 
 	vfs.src(['**/*', '!node_modules/**/*'], {
 			cwd: cwd,
@@ -26,11 +26,8 @@ function createApp(appName){
 		.resume();
 
 	var npm = findNpm()
-	childProcess.exec('cd '+ appName)
-	runCmd(which.sync('ls'), [], function () {})
-
 	//runCmd(which.sync('cd'), [appName], function () {})
-	//runCmd(which.sync(npm), ['install', 'react', '--save'], function () {})
+	runCmd(which.sync(npm), ['install', 'react', '--save'], function () {})
 }
 
 
