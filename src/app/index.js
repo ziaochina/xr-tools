@@ -29,13 +29,11 @@ function createApp(appName){
 			]
 
 			replaceNameFiles.forEach(o => {
-				fs.writeFileSync(o, fs.readFileSync(o, 'utf-8').replace(/\$\{appName\}/g, apName))
+				fs.writeFileSync(o, fs.readFileSync(o, 'utf-8').replace(/\$\{appName\}/g, appName))
 			})
 
-		})
-		.resume();
 
-	var npm = findNpm()
+				var npm = findNpm()
 	//runCmd(which.sync('cd'), [appName], function () {})
 	runCmd(which.sync(npm), ['install', 'react', 'react-dom', 'xr-meta-engine', '--save'], function () {	console.log(npm + ' install --save end');})
 	runCmd(which.sync(npm), [
@@ -59,6 +57,11 @@ function createApp(appName){
 		 '--save-dev'], function () {
 		 	console.log(npm + ' install --save-dev end');
 		 })
+
+		})
+		.resume();
+
+
 }
 
 
