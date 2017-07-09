@@ -25,7 +25,7 @@ function createApp(appName){
 		.pipe(vfs.dest(dest))
 		.on('end', function() {
 			var replaceNameFiles = [
-				path.join(dest, 'package.josn'),
+				path.join(dest, 'package.json'),
 			]
 
 			replaceNameFiles.forEach(o => {
@@ -37,7 +37,7 @@ function createApp(appName){
 
 	var npm = findNpm()
 	//runCmd(which.sync('cd'), [appName], function () {})
-	runCmd(which.sync(npm), ['install', 'react', 'react-dom', 'xr-meta-engine', '--save'], function () {})
+	runCmd(which.sync(npm), ['install', 'react', 'react-dom', 'xr-meta-engine', '--save'], function () {	console.log(npm + ' install --save end');})
 	runCmd(which.sync(npm), [
 		'install', 
 		'babel-core', 
@@ -56,7 +56,9 @@ function createApp(appName){
 		'style-loader',
 		'webpack',
 		'webpack-dev-server',
-		 '--save-dev'], function () {})
+		 '--save-dev'], function () {
+		 	console.log(npm + ' install --save-dev end');
+		 })
 }
 
 
