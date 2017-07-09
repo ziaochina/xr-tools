@@ -26,8 +26,9 @@ function createApp(appName){
 		.resume();
 
 	var npm = findNpm()
-
+	childProcess.exec('cd '+ appName)
 	runCmd(which.sync('ls'), [], function () {})
+
 	//runCmd(which.sync('cd'), [appName], function () {})
 	//runCmd(which.sync(npm), ['install', 'react', '--save'], function () {})
 }
