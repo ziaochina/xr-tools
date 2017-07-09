@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+
 const program = require('commander')
 const package = require('../package.json')
 const app = require('../lib/app/index')
@@ -7,15 +8,21 @@ const app = require('../lib/app/index')
 program
 	.version(package.version)
 
+//xr app <name> 
+//xr website  <name>
+//xr appstart
+
+
 program
 	.command('app')
+	.usage('[options] <file ...>')
 	.option('-i, --init <name>', '初始化一个应用')
 	.option('-c, --compile', '编译应用')
 	.option('-s, --start-app-name [name]', '开始的应用名称')
 	.option('-t, --target-dom-id [id]', '目标dom id')
 	.description('app工具')
-	.action(function(options) {
-		app(options)
+	.action(function(cmd, options) {
+		app(cmd, options)
 	})
 
 program
