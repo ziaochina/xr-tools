@@ -4,7 +4,7 @@ import pug from 'pug'
 
 export default function index(appFolder = '', startAppName = 'demo-helloWorld', targetDomId = 'app') {
 
-	const basePath = process.cwd() + appFolder,
+	const basePath = process.cwd() ,
 		appPaths = []
 
 	//获取文件数组
@@ -29,7 +29,7 @@ export default function index(appFolder = '', startAppName = 'demo-helloWorld', 
 		})
 	}
 
-	findAppPath(basePath, appFolder ? appFolder : '.')
+	findAppPath(path.join(basePath, appFolder), appFolder ? appFolder : '.')
 
 	/*
 	import _src from '../index.app'
