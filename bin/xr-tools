@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-
 const program = require('commander')
 const package = require('../package.json')
 const app = require('../lib/app/index')
@@ -10,6 +9,7 @@ const compile = require('../lib/compile/index')
 program
 	.version(package.version)
 
+// xr app <app name>
 program
 	.command('app')
 	.action(function (...args) {
@@ -19,6 +19,7 @@ program
 			app('app-demo', ...args)
 	})
 
+// xr website <website name>
 program
 	.command('website')
 	.action(function (...args) {
@@ -28,6 +29,7 @@ program
 			website('website-demo', ...args)
 	})
 
+// xr compile
 program
 	.command('compile')
 	.action(function (...args) {
@@ -36,6 +38,7 @@ program
 		else
 			compile('', ...args)
 	})
+
 
 program
 	.command('*')
