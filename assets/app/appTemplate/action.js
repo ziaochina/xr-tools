@@ -1,5 +1,6 @@
 import React from 'react'
 import { action as MetaAction, AppLoader } from 'xr-meta-engine'
+import config from './config'
 
 class action {
     constructor(option) {
@@ -10,10 +11,6 @@ class action {
         this.component = component
         this.injections = injections
         injections.reduce('init')
-    }
-
-    onRedirect = ({appName, appProps}) =>{
-        this.injections.reduce('redirect', appName, appProps)
     }
 }
 

@@ -1,6 +1,6 @@
 import { Map } from 'immutable'
-
 import { reducer as MetaReducer } from 'xr-meta-engine'
+import config from './config'
 
 class reducer {
     constructor(option) {

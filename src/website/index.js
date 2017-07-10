@@ -10,7 +10,7 @@ const { join, basename } = path
 
 export default function website(cmd, options) {
 	if(options.init){
-		var websiteName = path.basename(process.cwd())
+		var websiteName = cmd || path.basename(process.cwd())
 		createWebsite(websiteName, process.cwd())
 	}else{
 		createWebsite(cmd, join(process.cwd(), cmd))	

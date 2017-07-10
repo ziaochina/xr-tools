@@ -11,7 +11,7 @@ const { join, basename } = path
 
 export default function app(cmd, options) {
 	if(options.init){
-		var appName = path.basename(process.cwd())
+		var appName = cmd || path.basename(process.cwd())
 		createApp(appName,process.cwd())
 	}else{
 		createApp(cmd, join(process.cwd(), cmd))	
