@@ -10,13 +10,17 @@ import pug from 'pug'
 const { join, basename } = path
 
 export default function app(cmd, options) {
-	createApp(cmd)
+	if(options.init){
+		var appName = path.basename(process.cwd())
+		createApp(appName,process.cwd())
+	}else{
+		createApp(cmd, join(process.cwd(), cmd))	
+	}
 }
 
-function createApp(appName){
-	var cwd = join(__dirname, '../../assets/app/appTemplate');
-	var dest = join(process.cwd(), appName);
 
+function createApp(appName, dest){
+	var cwd = join(__dirname, '../../assets/app/appTemplate')
 	vfs.src(['**/*', '!node_modules/**/*'], {
 			cwd: cwd,
 			cwdbase: true,

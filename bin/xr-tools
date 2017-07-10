@@ -12,6 +12,7 @@ program
 // xr app <app name>
 program
 	.command('app')
+	.option("-i, --init", "init")
 	.action(function (...args) {
 		if (typeof args[0] === 'string')
 			app(...args)
@@ -22,6 +23,7 @@ program
 // xr website <website name>
 program
 	.command('website')
+	.option("-i, --init", "init")
 	.action(function (...args) {
 		if (typeof args[0] === 'string')
 			website(...args)
