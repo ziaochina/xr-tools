@@ -9,13 +9,20 @@ import childProcess from 'child_process'
 
 const { join, basename } = path
 
-export default function index(appFolder = '', startAppName = 'demo-helloWorld', targetDomId = 'app') {
+export default function index(appFolder = '') {
 
 	if(appFolder){
-		copy(appFolder)
+		copy(appFolder, ()=> buildIndex(appFolder))
+	}
+	else{
+		buildIndex(appFolder)
 	}
 
-	const basePath = process.cwd(),
+
+}
+
+function buildIndex(appFolder) {
+		const basePath = process.cwd(),
 		apps = []
 
 	//获取文件数组
@@ -84,7 +91,7 @@ Object.keys(xrComponents).forEach(key=>{
 }
 
 
-function copy(appFolder) {
+function copy(appFolder, cb) {
 	var cwd = join(process.cwd(), appFolder)
 	var dest = join(process.cwd(), 'src', 'apps', path.basename(cwd))
 
@@ -96,6 +103,7 @@ function copy(appFolder) {
 		.pipe(template(dest))
 		.pipe(vfs.dest(dest))
 		.on('end', function () {
+			cb()
 		})
 		.resume();
 }
