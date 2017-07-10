@@ -1,35 +1,19 @@
 {
-  "name": "xr-tools",
-  "version": "0.1.13",
-  "description": "",
-  "bin": {
-    "xr": "./bin/xr-tools"
-  },
+  "name": "website-demo",
+  "version": "1.0.0",
+  "description": "website-demo",
+  "main": "index.js",
   "scripts": {
-    "compile": "babel -d lib/ src/",
-    "prepublish": "rm -rf lib  && npm run compile",
-    "commit": "git add . && git commit -m 'zlj' &&  git push -u origin master",
+    "start": "webpack-dev-server --inline --progress --colors --watch --compress --content-base ./dist  --port 8089 --host 0.0.0.0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ziaochina/xr-tools.git"
-  },
+  "keywords": [],
   "author": "",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ziaochina/xr-tools/issues"
-  },
-  "homepage": "https://github.com/ziaochina/xr-tools#readme",
   "dependencies": {
-    "commander": "^2.11.0",
-    "inquirer": "^3.2.0",
-    "pug-cli": "^1.0.0-alpha6",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "through2": "^2.0.3",
-    "vinyl-fs": "^2.4.4",
-    "which": "^1.2.14",
+    "xr-component": "^0.1.151",
     "xr-meta-engine": "^0.2.10"
   },
   "devDependencies": {

@@ -36,8 +36,8 @@ export default function index(appFolder = '', startAppName = 'demo-helloWorld', 
 	import _src_apps_about from '../apps/about/index.app'
 	import _src_apps_helloWorld from '../apps/helloWorld/index.app'
 	*/
-	var appNames = appPaths.map(o=> o.replace(/\./g,'').replace(/\//g,'_'))
-	var importAppsContent = appPaths.map(o => `import ${o.replace(/\./g,'').replace(/\//g,'_')} from '${o}/index'`).join('\r\n')
+	var appNames = appPaths.map(o=> o.replace(/[\/\.-]/g,''))
+	var importAppsContent = appPaths.map(o => `import ${o.replace(/[\/\.-]/g,'')} from '${o}/index'`).join('\r\n')
 
 	/*
 	const apps = {
