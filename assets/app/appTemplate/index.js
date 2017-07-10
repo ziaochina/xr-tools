@@ -1,15 +1,16 @@
-import pa from './package.json'
 import config from './config'
-import * api from './api'
+import * as api from './api'
 
 export default {
-	name: pa.name,
-	version:pa.version,
-	description:pa.description,
+	name: "${appName}",
+	version:"1.0.0",
+	description:"${appName}",
 	meta : api.getMeta(),
+	components:[],
+	config:config,
 	load: (cb) => {
 		require.ensure([], require => {
 			cb(require('./component'), require('./action'), require('./reducer'))
-		}, 'example')
+		}, "${appName}")
 	}
 }

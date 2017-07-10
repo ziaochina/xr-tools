@@ -5,6 +5,7 @@ import path from 'path'
 import inquirer from 'inquirer'
 import which from 'which'
 import childProcess from 'child_process'
+import pug from 'pug'
 
 const { join, basename } = path
 
@@ -14,7 +15,7 @@ export default function app(cmd, options) {
 
 function createApp(appName){
 	var cwd = join(__dirname, '../../assets/app/appTemplate');
-	var dest = join(process.cwd());
+	var dest = join(process.cwd(), appName);
 
 	vfs.src(['**/*', '!node_modules/**/*'], {
 			cwd: cwd,
@@ -25,43 +26,15 @@ function createApp(appName){
 		.pipe(vfs.dest(dest))
 		.on('end', function() {
 			var replaceNameFiles = [
-				path.join(dest, 'package.json'),
+				path.join(dest, 'index.js'),
 			]
 
 			replaceNameFiles.forEach(o => {
 				fs.writeFileSync(o, fs.readFileSync(o, 'utf-8').replace(/\$\{appName\}/g, appName))
 			})
-
-
-				var npm = findNpm()
-	//runCmd(which.sync('cd'), [appName], function () {})
-	runCmd(which.sync(npm), ['install', 'react', 'react-dom', 'xr-meta-engine', '--save'], function () {	console.log(npm + ' install --save end');})
-	runCmd(which.sync(npm), [
-		'install', 
-		'babel-core', 
-		'babel-loader', 
-		'babel-plugin-add-module-exports',
-		'babel-plugin-transform-decorators-legacy',
-		'babel-plugin-transform-runtime',
-		'babel-preset-es2015',
-		'babel-preset-react',
-		'babel-preset-stage-0',
-		'css-loader',
-		'file-loader',
-		'html-webpack-plugin',
-		'less',
-		'less-loader',
-		'style-loader',
-		'webpack',
-		'webpack-dev-server',
-		 '--save-dev'], function () {
-		 	console.log(npm + ' install --save-dev end');
-		 })
-
+				
 		})
 		.resume();
-
-
 }
 
 
@@ -110,3 +83,31 @@ function findNpm() {
 
 
 
+/*
+var npm = findNpm()
+	//runCmd(which.sync('cd'), [appName], function () {})
+	runCmd(which.sync(npm), ['install', 'react', 'react-dom', 'xr-meta-engine', '--save'], function () {	console.log(npm + ' install --save end');})
+
+	runCmd(which.sync(npm), [
+		'install', 
+		'babel-core', 
+		'babel-loader', 
+		'babel-plugin-add-module-exports',
+		'babel-plugin-transform-decorators-legacy',
+		'babel-plugin-transform-runtime',
+		'babel-preset-es2015',
+		'babel-preset-react',
+		'babel-preset-stage-0',
+		'css-loader',
+		'file-loader',
+		'html-webpack-plugin',
+		'less',
+		'less-loader',
+		'style-loader',
+		'webpack',
+		'webpack-dev-server',
+		 '--save-dev'], function () {
+		 	console.log(npm + ' install --save-dev end');
+		 })
+
+*/

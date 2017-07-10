@@ -4,30 +4,42 @@
 const program = require('commander')
 const package = require('../package.json')
 const app = require('../lib/app/index')
+const website = require('../lib/website/index')
+const index = require('../lib/index/index')
 
 program
 	.version(package.version)
 
-//xr app <name> 
-//xr website  <name>
-//xr appstart
-
-
 program
 	.command('app')
-	.usage('[options] <file ...>')
-	.option('-i, --init <name>', '初始化一个应用')
-	.option('-c, --compile', '编译应用')
-	.option('-s, --start-app-name [name]', '开始的应用名称')
-	.option('-t, --target-dom-id [id]', '目标dom id')
-	.description('app工具')
-	.action(function(cmd, options) {
-		app(cmd, options)
+	.action(function (...args) {
+		if (typeof args[0] === 'string')
+			app(...args)
+		else
+			app('app-demo', ...args)
+	})
+
+program
+	.command('website')
+	.action(function (...args) {
+		if (typeof args[0] === 'string')
+			website(...args)
+		else
+			website('website-demo', ...args)
+	})
+
+program
+	.command('index')
+	.action(function (...args) {
+		if (typeof args[0] === 'string')
+			index(...args)
+		else
+			index('', ...args)
 	})
 
 program
 	.command('*')
-	.action(function(env) {
+	.action(function (env) {
 		console.log('没有这个命令 "%s"', env)
 	})
 
@@ -35,7 +47,7 @@ program
 program.parse(process.argv)
 
 //捕获当前进程接收到的信号（如按下了 ctrl + c)
-process.on('SIGINT', function() {
+process.on('SIGINT', function () {
 	program.runningCommand && program.runningCommand.kill('SIGKILL');
 	process.exit(0);
 })
