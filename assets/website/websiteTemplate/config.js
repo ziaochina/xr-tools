@@ -4,9 +4,7 @@ function config(options) {
 	_options = options
 	_options.targetDomId = 'app'
 	_options.startAppName = 'app-demo'
-	Object.keys(options.apps).forEach(key=>{
-		options.apps[key].config()
-	})
+	//options.apps['appname'].config({key:value})
 
 	return _options
 }
