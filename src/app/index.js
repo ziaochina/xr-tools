@@ -31,11 +31,14 @@ function createApp(appName, dest){
 		.on('end', function() {
 			var replaceNameFiles = [
 				path.join(dest, 'index.js'),
+				path.join(dest, 'style.less'),
 			]
 
 			replaceNameFiles.forEach(o => {
 				fs.writeFileSync(o, fs.readFileSync(o, 'utf-8').replace(/\$\{appName\}/g, appName))
 			})
+
+			console.log('OK!')
 				
 		})
 		.resume();
@@ -47,8 +50,6 @@ function template(dest) {
 		if (!file.stat.isFile()) {
 			return cb();
 		}
-
-		console.log('Write %s', simplifyFilename(join(dest, basename(file.path))));
 		this.push(file);
 		cb();
 	});

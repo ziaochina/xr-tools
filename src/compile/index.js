@@ -36,7 +36,7 @@ function buildIndex(appFolder) {
 					let content = fs.readFileSync(path.join(absoultePath, filename), 'utf-8')
 					if(/load[ ]*:[ ]*\([ ]*cb[ ]*\)/.test(content)){
 						let appName = content.match( /name[ ]*:[ ]*\"([^\"]+)\"/)[1].replace(/[\/\.-]/g,'_')
-						apps.push({name:appName, path:`${relaPath}/${filename}`})
+						apps.push({name:appName, path:`${relaPath}/${filename}`, lessFilePath:`${relaPath}/style.less`})
 					}
 					
 				}
@@ -86,8 +86,19 @@ Object.keys(xrComponents).forEach(key=>{
 	if (existsIndex) {
 		fs.unlinkSync(indexFilePath)
 	}
-	console.log(indexFilePath)
 	fs.writeFileSync(indexFilePath, indexContent)
+
+	var appLessContent = apps.map(o => `@import "${o.lessFilePath}"`).join('\r\n')
+
+	var appLessPath = path.join(basePath, 'assets','styles', 'apps.less')
+	var existsAppLess = fs.existsSync(appLessPath)
+	if (existsAppLess) {
+		fs.unlinkSync(appLessPath)
+	}
+
+	fs.writeFileSync(appLessPath, appLessContent)
+
+	console.log('OK!')
 }
 
 

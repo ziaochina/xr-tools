@@ -38,8 +38,7 @@ function createWebsite(websiteName, dest) {
 
 			var npm = findNpm()
 
-			runCmd(which.sync(npm), ['install', 'react', 'react-dom', 'xr-meta-engine', 'xr-component', '--save'], 
-				function () { console.log(npm + ' install --save end'); }, dest)
+			runCmd(which.sync(npm), ['install', 'react', 'react-dom', 'xr-meta-engine', 'xr-component', '--save'], function () {  }, dest)
 			runCmd(which.sync(npm), [
 				'install',
 				'babel-core',
@@ -59,7 +58,7 @@ function createWebsite(websiteName, dest) {
 				'webpack',
 				'webpack-dev-server',
 				'--save-dev'], function () {
-					console.log(npm + ' install --save-dev end');
+					console.log("OK!");
 				}, dest)
 
 		})

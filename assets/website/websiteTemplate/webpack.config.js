@@ -30,7 +30,7 @@ plugins.push(new HtmlWebpackPlugin({
 module.exports = {
     devtool: 'source-map',
     entry:{
-        bundle: ["./index.js"],
+        bundle: ["./index.js", "./assets/styles/index.less"],
         vendor: ["react", 'react-dom', 'xr-meta-engine']
     } ,
 
