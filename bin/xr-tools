@@ -5,6 +5,7 @@ const package = require('../package.json')
 const app = require('../lib/app/index')
 const website = require('../lib/website/index')
 const compile = require('../lib/compile/index')
+const install = require('../lib/install/index')
 
 program
 	.version(package.version)
@@ -39,6 +40,16 @@ program
 			compile(...args)
 		else
 			compile('', ...args)
+	})
+
+// xr install xr-template-root
+program
+	.command('install')
+	.action(function (...args) {
+		if (typeof args[0] === 'string')
+			install(...args)
+		else
+			install('', ...args)
 	})
 
 
