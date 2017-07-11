@@ -2,9 +2,9 @@ var _options
 
 function config(options) {
 	_options = options
-	_options.targetDomId = 'app'
-	_options.startAppName = 'app-demo'
-	//options.apps['appname'].config({key:value})
+	_options.targetDomId = '***' //app
+	_options.startAppName = '***' //xr-template-root
+	//options.apps['xr-template-root'].config({defaultAppName:'app-demo'})
 
 	return _options
 }

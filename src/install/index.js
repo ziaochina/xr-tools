@@ -17,7 +17,16 @@ function npmInstall(appName){
 	var npm = findNpm()
 
 	runCmd(which.sync(npm), ['install', appName, '--save'], function(){
+
 		cpToXR(appName)
+		
+		runCmd(which.sync(npm), ['update'], function(){
+			runCmd(which.sync(npm), ['uninstall', appName], function(){
+				console.log('OK!')
+			}, process.cwd())
+		},process.cwd())
+
+		
 	},process.cwd())
 }
 
@@ -43,7 +52,6 @@ function template(dest) {
 			return cb();
 		}
 
-		console.log('Write %s', simplifyFilename(join(dest, basename(file.path))));
 		this.push(file);
 		cb();
 	});
