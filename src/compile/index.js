@@ -88,7 +88,7 @@ Object.keys(xrComponents).forEach(key=>{
 	fs.writeFileSync(indexFilePath, indexContent)
 
 	var appLessContent = apps.map(
-		o => `@import "${path.relative(path.join(basePath,'assets','styles','app.less'),path.join(o.path, 'style.less'))}"`).join('\r\n')
+		o => `@import "${path.relative(path.join(basePath,'assets','styles'),path.join(o.path, 'style.less'))}"`).join('\r\n')
 
 	var appLessPath = path.join(basePath, 'assets','styles', 'apps.less')
 	var existsAppLess = fs.existsSync(appLessPath)
