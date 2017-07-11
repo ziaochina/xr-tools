@@ -29,7 +29,7 @@ function cpToXR(appName){
 		appName =  content.match( /name[ ]*:[ ]*\"([^\"]+)\"/)[1].replace(/[\/\.]/g,'-') || appName
 	}
 	
-	var dest = join(process.cwd(), 'xr_apps')
+	var dest = join(process.cwd(), 'xr_apps', appName)
 
 	vfs.src(['**/*', '!node_modules/**/*'], {
 		cwd: cwd,
