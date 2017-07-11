@@ -9,16 +9,16 @@ import childProcess from 'child_process'
 
 const { join, basename } = path
 
-export default function install(appName) {
-	npmInstall(appName)
+export default function install(appName, targetFolderName) {
+	npmInstall(appName, targetFolderName)
 }
 
-function npmInstall(appName){
+function npmInstall(appName, targetFolderName){
 	var npm = findNpm()
 
 	runCmd(which.sync(npm), ['install', appName, '--save'], function(){
 
-		cpToXR(appName)
+		cpToXR(appName, targetFolderName)
 		
 		runCmd(which.sync(npm), ['update'], function(){
 			runCmd(which.sync(npm), ['uninstall', appName], function(){
@@ -30,9 +30,9 @@ function npmInstall(appName){
 	},process.cwd())
 }
 
-function cpToXR(appName){
+function cpToXR(appName, targetFolderName){
 	var cwd = join(process.cwd(), 'node_modules', appName)
-	var dest = join(process.cwd(), 'xr_apps', appName)
+	var dest = join(process.cwd(), 'apps', targetFolderName)
 
 	vfs.src(['**/*', '!node_modules/**/*'], {
 		cwd: cwd,

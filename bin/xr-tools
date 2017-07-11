@@ -46,10 +46,13 @@ program
 program
 	.command('install')
 	.action(function (...args) {
-		if (typeof args[0] === 'string')
+		if( typeof args[0] !== 'string'){
+			console.log('please input app name')
+		}
+		else if (typeof args[1] === 'string')
 			install(...args)
 		else
-			install('', ...args)
+			install(args[0], args[0], ...args)
 	})
 
 
