@@ -49,8 +49,10 @@ function buildIndex(appFolder) {
 	findApps(basePath)
 	console.log(apps)
 
+	apps.map(o=>console.log(o.path))
+	console.log(1111111)	
 	apps.map(o=>console.log(path.relative(o.path)))
-console.log(1111111)	
+console.log(22222)	
 	/*
 	import _src from '../index.app'
 	import _src_apps_about from '../apps/about/index.app'
