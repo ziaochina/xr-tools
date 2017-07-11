@@ -96,7 +96,7 @@ function copy(appFolder, cb) {
 	var appName = path.basename(cwd)
 	if(fs.existsSync(path.join(cwd, 'index.js'))){
 		var content = fs.readFileSync(path.join(cwd, 'index.js'), 'utf-8')
-		appName =  content.match( /name[ ]*:[ ]*\"([^\"]+)\"/)[1].replace(/[\/\.-]/g,'_') || appName
+		appName =  content.match( /name[ ]*:[ ]*\"([^\"]+)\"/)[1].replace(/[\/\.]/g,'-') || appName
 	}
 	
 	var dest = join(process.cwd(), 'src', 'apps', appName)
