@@ -16,7 +16,7 @@ export default function install(appName) {
 function npmInstall(appName){
 	var npm = findNpm()
 
-	runCmd(which.sync(npm), ['install', appName], function(){
+	runCmd(which.sync(npm), ['install', appName, '--save'], function(){
 		cpToXR(appName)
 	},process.cwd())
 }
