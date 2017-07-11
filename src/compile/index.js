@@ -53,7 +53,7 @@ function buildIndex(appFolder) {
 	import _src_apps_about from '../apps/about/index.app'
 	import _src_apps_helloWorld from '../apps/helloWorld/index.app'
 	*/
-	var importAppsContent = apps.map(o => `import ${o.name} from '${path.relative(basePath,path.join(o.path,'index.js'))}'`).join('\r\n')
+	var importAppsContent = apps.map(o => `import ${o.name} from './${path.relative(basePath,path.join(o.path,'index.js'))}'`).join('\r\n')
 
 	/*
 	const apps = {
@@ -88,7 +88,7 @@ Object.keys(xrComponents).forEach(key=>{
 	fs.writeFileSync(indexFilePath, indexContent)
 
 	var appLessContent = apps.map(
-		o => `@import "${path.relative(path.join(basePath,'assets','styles'),path.join(o.path, 'style.less'))}"`).join('\r\n')
+		o => `@import "./${path.relative(path.join(basePath,'assets','styles'),path.join(o.path, 'style.less'))}"`).join('\r\n')
 
 	var appLessPath = path.join(basePath, 'assets','styles', 'apps.less')
 	var existsAppLess = fs.existsSync(appLessPath)
