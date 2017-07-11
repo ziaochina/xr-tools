@@ -26,7 +26,7 @@ function buildIndex(appFolder) {
 		apps = []
 
 	//获取文件数组
-	const findApps = (absoultePath, relaPath) => {
+	const findApps = (absoultePath) => {
 		var files = fs.readdirSync(absoultePath, () => {})
 		files.forEach(filename => {
 			var stats = fs.statSync(path.join(absoultePath, filename))
@@ -36,25 +36,24 @@ function buildIndex(appFolder) {
 					let content = fs.readFileSync(path.join(absoultePath, filename), 'utf-8')
 					if(/load[ ]*:[ ]*\([ ]*cb[ ]*\)/.test(content)){
 						let appName = content.match( /name[ ]*:[ ]*\"([^\"]+)\"/)[1].replace(/[\/\.-]/g,'_')
-						apps.push({name:appName, path:`${relaPath}/${filename}`, lessFilePath:`${relaPath}/style.less`})
+						apps.push({name:appName, path:absoultePath})
 					}
 					
 				}
 			} else if (stats.isDirectory() && filename != 'node_modules') {
-				var dirName = filename;
-				findApps(path.join(absoultePath, filename), `${relaPath}/${dirName}`)
+				findApps(path.join(absoultePath, filename))
 			}
 		})
 	}
 
-	findApps(basePath, '.')
+	findApps(basePath)
 
 	/*
 	import _src from '../index.app'
 	import _src_apps_about from '../apps/about/index.app'
 	import _src_apps_helloWorld from '../apps/helloWorld/index.app'
 	*/
-	var importAppsContent = apps.map(o => `import ${o.name} from '${o.path}'`).join('\r\n')
+	var importAppsContent = apps.map(o => `import ${o.name} from '${path.relative(path.join(o.path,'index.js'))}'`).join('\r\n')
 
 	/*
 	const apps = {
@@ -88,7 +87,7 @@ Object.keys(xrComponents).forEach(key=>{
 	}
 	fs.writeFileSync(indexFilePath, indexContent)
 
-	var appLessContent = apps.map(o => `@import "${o.lessFilePath}"`).join('\r\n')
+	var appLessContent = apps.map(o => `@import "${path.relative(path.join(o.path, 'style.less'))}"`).join('\r\n')
 
 	var appLessPath = path.join(basePath, 'assets','styles', 'apps.less')
 	var existsAppLess = fs.existsSync(appLessPath)
