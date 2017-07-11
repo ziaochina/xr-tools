@@ -44,6 +44,23 @@ function cpToXR(appName){
 		.resume();
 }
 
+function template(dest) {
+	return through.obj(function (file, enc, cb) {
+		if (!file.stat.isFile()) {
+			return cb();
+		}
+
+		console.log('Write %s', simplifyFilename(join(dest, basename(file.path))));
+		this.push(file);
+		cb();
+	});
+}
+
+function simplifyFilename(filename) {
+	return filename.replace(process.cwd(), ".");
+}
+
+
 
 function runCmd(cmd, args, fn, cwd) {
 	args = args || []
