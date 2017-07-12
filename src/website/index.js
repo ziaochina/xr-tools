@@ -5,7 +5,6 @@ import path from 'path'
 import inquirer from 'inquirer'
 import which from 'which'
 import childProcess from 'child_process'
-import index from '../index'
 
 const {
 	join,
