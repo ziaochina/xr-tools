@@ -83,7 +83,7 @@ function simplifyFilename(filename) {
 	return filename.replace(process.cwd(), ".");
 }
 
-function runCmd(cmd, args, fn) {
+function runCmd(cmd, args, fn, cwd) {
 	args = args || []
 	var runner = childProcess.spawn(cmd, args, {
 		stdio: "inherit",
