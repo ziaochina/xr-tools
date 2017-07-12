@@ -37,35 +37,31 @@ function createWebsite(websiteName) {
 
 			var npm = findNpm()
 
-			childProcess.exec(`cd ${websiteName} && npm i --save react react-dom xr-meta-engine`, (err, stdout, stderr) => {
-				if (err) {
-					console.error(err);
-					return;
-				}
-				console.log(stdout);
-			})
-
-
-			childProcess.exec(`cd ${websiteName} && npm i --save-dev babel-core 
-						babel-loader babel-plugin-add-module-exports 
-						babel-plugin-transform-decorators-legacy
-						babel-plugin-transform-runtime
-						babel-preset-es2015
-						babel-preset-react
-						babel-preset-stage-0
-						css-loader
-						file-loader
-						html-webpack-plugin
-						less
-						less-loader
-						webpack
-						webpack-dev-server`, (err, stdout, stderr) => {
-				if (err) {
-					console.error(err);
-					return;
-				}
-				console.log(stdout);
-			})
+			runCmd(which.sync(npm), ['install', 'react', 'react-dom', 'xr-meta-engine', 'xr-component', '--save'], function () {  
+				runCmd(which.sync(npm), [
+				'install',
+				'babel-core',
+				'babel-loader',
+				'babel-plugin-add-module-exports',
+				'babel-plugin-transform-decorators-legacy',
+				'babel-plugin-transform-runtime',
+				'babel-preset-es2015',
+				'babel-preset-react',
+				'babel-preset-stage-0',
+				'css-loader',
+				'file-loader',
+				'html-webpack-plugin',
+				'less',
+				'less-loader',
+				'style-loader',
+				'webpack',
+				'webpack-dev-server',
+				'--save-dev'], function () {
+					console.log("OK!");
+				}, dest)
+	
+			}, dest)
+			
 		}).resume();
 }
 
@@ -75,8 +71,6 @@ function template(dest) {
 		if (!file.stat.isFile()) {
 			return cb();
 		}
-
-		console.log('Write %s', simplifyFilename(join(dest, basename(file.path))));
 		this.push(file);
 		cb();
 	});
