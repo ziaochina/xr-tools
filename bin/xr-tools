@@ -5,7 +5,7 @@ const package = require('../package.json')
 const app = require('../lib/app/index')
 const website = require('../lib/website/index')
 const compile = require('../lib/compile/index')
-const install = require('../lib/install/index')
+const clone = require('../lib/clone/index')
 
 program
 	.version(package.version)
@@ -50,9 +50,9 @@ program
 			console.log('please input app name')
 		}
 		else if (typeof args[1] === 'string')
-			install(...args)
+			clone(...args)
 		else
-			install(args[0], args[0], ...args)
+			clone(args[0], args[0], ...args)
 	})
 
 
