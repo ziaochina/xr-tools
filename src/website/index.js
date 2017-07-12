@@ -86,7 +86,8 @@ function simplifyFilename(filename) {
 function runCmd(cmd, args, fn) {
 	args = args || []
 	var runner = childProcess.spawn(cmd, args, {
-		stdio: "inherit"
+		stdio: "inherit",
+		cwd:cwd
 	})
 	runner.on('close', function(code) {
 		if (fn) {
