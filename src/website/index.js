@@ -37,10 +37,16 @@ function createWebsite(websiteName) {
 
 			var npm = findNpm()
 
-			childProcess.execSync(`cd ${websiteName} && npm i --save react react-dom xr-meta-engine`)
+			childProcess.exec(`cd ${websiteName} && npm i --save react react-dom xr-meta-engine`, (err, stdout, stderr) => {
+				if (err) {
+					console.error(err);
+					return;
+				}
+				console.log(stdout);
+			})
 
 
-			childProcess.execSync(`cd ${websiteName} && npm i -- save-dev babel-core 
+			childProcess.exec(`cd ${websiteName} && npm i --save-dev babel-core 
 						babel-loader babel-plugin-add-module-exports 
 						babel-plugin-transform-decorators-legacy
 						babel-plugin-transform-runtime
@@ -53,7 +59,13 @@ function createWebsite(websiteName) {
 						less
 						less-loader
 						webpack
-						webpack-dev-server`)
+						webpack-dev-server`, (err, stdout, stderr) => {
+				if (err) {
+					console.error(err);
+					return;
+				}
+				console.log(stdout);
+			})
 		}).resume();
 }
 
