@@ -42,9 +42,9 @@ program
 			compile('', ...args)
 	})
 
-// xr install xr-template-root
+// xr clone xr-template-root
 program
-	.command('install')
+	.command('clone')
 	.action(function (...args) {
 		if( typeof args[0] !== 'string'){
 			console.log('please input app name')

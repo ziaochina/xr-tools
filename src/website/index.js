@@ -5,29 +5,29 @@ import path from 'path'
 import inquirer from 'inquirer'
 import which from 'which'
 import childProcess from 'child_process'
+import index from '../index'
 
-const { join, basename } = path
+const {
+	join,
+	basename
+} = path
 
 export default function website(cmd, options) {
-	if(options.init){
-		var websiteName = cmd || path.basename(process.cwd())
-		createWebsite(websiteName, process.cwd())
-	}else{
-		createWebsite(cmd, join(process.cwd(), cmd))	
-	}
-	
+	createWebsite(cmd)
 }
 
-function createWebsite(websiteName, dest) {
+function createWebsite(websiteName) {
 	var cwd = join(__dirname, '../../assets/website/websiteTemplate');
+	var dest = join(process.cwd(), websiteName);
+	console.log(websiteName)
 	vfs.src(['**/*', '!node_modules/**/*'], {
-		cwd: cwd,
-		cwdbase: true,
-		dot: true
-	})
+			cwd: cwd,
+			cwdbase: true,
+			dot: true
+		})
 		.pipe(template(dest))
 		.pipe(vfs.dest(dest))
-		.on('end', function () {
+		.on('end', function() {
 			var replaceNameFiles = [
 				path.join(dest, 'package.json'),
 			]
@@ -38,36 +38,40 @@ function createWebsite(websiteName, dest) {
 
 			var npm = findNpm()
 
-			runCmd(which.sync(npm), ['install', 'react', 'react-dom', 'xr-meta-engine', 'xr-component', '--save'], function () {  }, dest)
-			runCmd(which.sync(npm), [
-				'install',
-				'babel-core',
-				'babel-loader',
-				'babel-plugin-add-module-exports',
-				'babel-plugin-transform-decorators-legacy',
-				'babel-plugin-transform-runtime',
-				'babel-preset-es2015',
-				'babel-preset-react',
-				'babel-preset-stage-0',
-				'css-loader',
-				'file-loader',
-				'html-webpack-plugin',
-				'less',
-				'less-loader',
-				'style-loader',
-				'webpack',
-				'webpack-dev-server',
-				'--save-dev'], function () {
-					console.log("OK!");
-				}, dest)
+			childProcess.exec(`cd ${websiteName} && npm i --save react react-dom xr-meta-engine`, (err, stdout, stderr) => {
+				if (err) {
+					console.error(err);
+					return;
+				}
+				console.log(stdout);
 
-		})
-		.resume();
+				childProcess.exec(`cd ${websiteName} && npm i -- save-dev babel-core 
+						babel-loader babel-plugin-add-module-exports 
+						babel-plugin-transform-decorators-legacy
+						babel-plugin-transform-runtime
+						babel-preset-es2015
+						babel-preset-react
+						babel-preset-stage-0
+						css-loader
+						file-loader
+						html-webpack-plugin
+						less
+						less-loader
+						webpack
+						webpack-dev-server`, (err, stdout, stderr) => {
+					if (err) {
+						console.error(err);
+						return;
+					}
+					console.log(stdout);
+				})
+			})
+		}).resume();
 }
 
 
 function template(dest) {
-	return through.obj(function (file, enc, cb) {
+	return through.obj(function(file, enc, cb) {
 		if (!file.stat.isFile()) {
 			return cb();
 		}
@@ -82,13 +86,12 @@ function simplifyFilename(filename) {
 	return filename.replace(process.cwd(), ".");
 }
 
-function runCmd(cmd, args, fn, cwd) {
+function runCmd(cmd, args, fn) {
 	args = args || []
 	var runner = childProcess.spawn(cmd, args, {
-		stdio: "inherit",
-		cwd:cwd
+		stdio: "inherit"
 	})
-	runner.on('close', function (code) {
+	runner.on('close', function(code) {
 		if (fn) {
 			fn(code)
 		}
