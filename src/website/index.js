@@ -41,10 +41,8 @@ function createWebsite(websiteName) {
 				if (err) {
 					console.error(err);
 					return;
-				}
-				console.log(stdout);
-
-				childProcess.exec(`cd ${websiteName} && npm i -- save-dev babel-core 
+				} else {
+					childProcess.exec(`cd ${websiteName} && npm i -- save-dev babel-core 
 						babel-loader babel-plugin-add-module-exports 
 						babel-plugin-transform-decorators-legacy
 						babel-plugin-transform-runtime
@@ -58,12 +56,14 @@ function createWebsite(websiteName) {
 						less-loader
 						webpack
 						webpack-dev-server`, (err, stdout, stderr) => {
-					if (err) {
-						console.error(err);
-						return;
-					}
-					console.log(stdout);
-				})
+						if (err) {
+							console.error(err);
+							return;
+						}
+						console.log(stdout);
+					})
+				}
+				console.log(stdout);
 			})
 		}).resume();
 }
