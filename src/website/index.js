@@ -12,13 +12,16 @@ const {
 } = path
 
 export default function website(cmd, options) {
-	createWebsite(cmd)
+	if(options.init){
+		var websiteName = cmd || path.basename(process.cwd())
+		createWebsite(websiteName, process.cwd())
+	}else{
+		createWebsite(cmd, join(process.cwd(), cmd))	
+	}
+	
 }
-
-function createWebsite(websiteName) {
+function createWebsite(websiteName, dest) {
 	var cwd = join(__dirname, '../../assets/website/websiteTemplate');
-	var dest = join(process.cwd(), websiteName);
-	console.log(websiteName)
 	vfs.src(['**/*', '!node_modules/**/*'], {
 			cwd: cwd,
 			cwdbase: true,
