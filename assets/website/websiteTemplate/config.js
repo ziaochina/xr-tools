@@ -1,3 +1,5 @@
+import {Toast,Notification, Modal } from 'xr-component'
+
 var _options
 
 function config(options) {
@@ -6,6 +8,9 @@ function config(options) {
 	_options.startAppName = '***' //xr-template-root
 	//options.apps['xr-template-root'].config({defaultAppName:'app-demo'})
 
+	_options.toast = Toast
+	_options.notification = Notification
+	_options.modal = Modal
 	return _options
 }
 

@@ -40,7 +40,7 @@ function createWebsite(websiteName, dest) {
 
 			var npm = findNpm()
 
-			runCmd(which.sync(npm), ['install', 'react', 'react-dom', 'xr-meta-engine', 'xr-component', '--save'], function () {  
+			runCmd(which.sync(npm), ['install', 'react', 'react-dom', 'xr-meta-engine', 'xr-component', 'xr-utils', '--save'], function () {  
 				runCmd(which.sync(npm), [
 				'install',
 				'babel-core',
