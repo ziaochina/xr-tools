@@ -78,5 +78,13 @@ module.exports = {
         }],
     },
 
+    devServer: {
+        contentBase: './dist/',
+        hot: true,
+        proxy: {
+            '/v1/*': 'http://127.0.0.1:8000/'
+
+        }
+    },
     plugins: plugins
 };
