@@ -1,7 +1,10 @@
-var _options
+var _options = {}
 
 function config(options) {
-	_options = options
+	if(options){
+		_options = {... _options, ...options }
+	}
+	
 }
 
 config.getCurrent = () => _options
